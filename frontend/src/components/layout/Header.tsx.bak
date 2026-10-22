@@ -1,0 +1,134 @@
+import React, { useState } from 'react';
+import { ShieldCheckIcon, MenuIcon, CloseIcon } from '../common/Icons';
+
+interface HeaderProps {
+  onOpenAuthInfo: () => void;
+  onOpenReportModal: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onOpenAuthInfo, onOpenReportModal }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <header className="site-header">
+      {/* Top Demo Notification Banner */}
+      <div className="demo-top-banner">
+        <span>⚠️ DEMO ENVIRONMENT: Showing sample properties and verified badges for testing. Backend integration begins in Phase 4.</span>
+      </div>
+
+      <div className="container">
+        <nav className="site-nav" aria-label="Main Navigation">
+          {/* Logo & Tagline */}
+          <a href="#" className="brand-logo" aria-label="TrustStay Home">
+            <div style={{
+              width: 38,
+              height: 38,
+              borderRadius: '10px',
+              background: 'linear-gradient(135deg, #2563eb, #0d9488)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#ffffff'
+            }}>
+              <ShieldCheckIcon size={24} />
+            </div>
+            <span className="brand-logo-text">
+              Trust<span className="brand-logo-accent">Stay</span>
+            </span>
+          </a>
+
+          {/* Desktop Navigation */}
+          <div className="nav-links">
+            <a href="#browse-section" className="nav-link active">Browse Accommodations</a>
+            <a href="#how-it-works" className="nav-link">How Verification Works</a>
+            <a href="#safety-centre" className="nav-link">Safety Centre</a>
+            <button
+              onClick={onOpenReportModal}
+              className="nav-link"
+              style={{ background: 'none', border: 'none', font: 'inherit', cursor: 'pointer' }}
+            >
+              Report Listing
+            </button>
+          </div>
+
+          {/* Action CTAs */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <button
+              onClick={onOpenAuthInfo}
+              className="btn-secondary"
+              title="Sign in with phone OTP (Available with Spring Boot API in Phase 4)"
+            >
+              Sign In / OTP
+            </button>
+            <button
+              onClick={onOpenAuthInfo}
+              className="btn-primary"
+              title="Post property (Available with Spring Boot API in Phase 4)"
+            >
+              Post Property
+            </button>
+
+            {/* Mobile hamburger button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="mobile-nav-toggle"
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <CloseIcon size={22} /> : <MenuIcon size={22} />}
+            </button>
+          </div>
+        </nav>
+      </div>
+
+      {/* Mobile Drawer */}
+      {mobileMenuOpen && (
+        <div className="mobile-menu-drawer">
+          <a
+            href="#browse-section"
+            className="nav-link active"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Browse Accommodations
+          </a>
+          <a
+            href="#how-it-works"
+            className="nav-link"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            How Verification Works
+          </a>
+          <a
+            href="#safety-centre"
+            className="nav-link"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Safety Centre
+          </a>
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onOpenReportModal();
+            }}
+            className="nav-link"
+            style={{ textAlign: 'left', background: 'none', border: 'none', font: 'inherit', cursor: 'pointer' }}
+          >
+            Report Listing
+          </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.75rem' }}>
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenAuthInfo();
+              }}
+              className="btn-secondary"
+              style={{ width: '100%', justifyContent: 'center' }}
+            >
+              Sign In (Phone OTP)
+            </button>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};

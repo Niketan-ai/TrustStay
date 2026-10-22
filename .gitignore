@@ -1,0 +1,50 @@
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.secret
+*.pem
+*.key
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# IDE and Editor configurations
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node.js / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Java / Spring Boot Backend
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+*.war
+
+# Python / Fraud Service
+fraud-service/__pycache__/
+fraud-service/*/__pycache__/
+*.pyc
+*.pyo
+fraud-service/venv/
+fraud-service/.env/
+
+
+# Additional project exclusions
+node_modules/
+**/node_modules/
+frontend/.env.development
+
+
